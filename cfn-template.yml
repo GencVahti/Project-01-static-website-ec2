@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: >
+  Kittens Carousel is a static website 
+  application deployed with Apache Web Server on AWS Elastic Compute Cloud (EC2) Instance 
+  using AWS Cloudformation Service.
+Resources:
+  FirstProjectCloudformation:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-05fa00d4c63e32376 
+      InstanceType: t2.micro
+      KeyName: my_new_key
+      SecurityGroups:
+        - genco_ec2
+      Tags:
+        - Key: Name 
+          Value: Myfirst-Project-Cloudformation
+      UserData: 
+        Fn::Base64: |
+          #!/bin/bash
+          sudo yum update -y 
+          sudo yum install -y httpd
+          sudo systemctl start httpd
+          sudo systemctl enable httpd 
+          sudo chmod -R 777 /var/www/html
+          cd /var/www/html
+          wget https://raw.githubusercontent.com/GencVahti/Project-101-kittens-carousel-static-website-ec2/main/static-web/index.html
+          wget https://raw.githubusercontent.com/GencVahti/Project-101-kittens-carousel-static-website-ec2/main/static-web/cat0.png
+          wget https://raw.githubusercontent.com/GencVahti/Project-101-kittens-carousel-static-website-ec2/main/static-web/cat1.png
+          wget https://raw.githubusercontent.com/GencVahti/Project-101-kittens-carousel-static-website-ec2/main/static-web/cat2.png
+          wget https://raw.githubusercontent.com/GencVahti/Project-101-kittens-carousel-static-website-ec2/main/static-web/cat3.png
